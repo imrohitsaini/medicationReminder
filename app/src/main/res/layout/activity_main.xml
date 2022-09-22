@@ -23,7 +23,7 @@
         android:id="@+id/bottomNav"
         style="@style/Widget.App.BottomNavigationView"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/_50sdp"
         app:itemTextAppearanceActive="@style/BottomNavActive"
         app:itemTextAppearanceInactive="@style/BottomNavInactive"
         app:layout_constraintBottom_toBottomOf="parent"
