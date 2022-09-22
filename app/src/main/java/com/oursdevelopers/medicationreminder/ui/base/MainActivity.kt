@@ -1,21 +1,19 @@
-package com.oursdevelopers.medicationreminder
+package com.oursdevelopers.medicationreminder.ui.base
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
+import com.oursdevelopers.medicationreminder.R
 import com.oursdevelopers.medicationreminder.databinding.ActivityMainBinding
 import com.oursdevelopers.medicationreminder.ui.HomeFragment
 import com.oursdevelopers.medicationreminder.ui.SettingsFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+    override fun onCreate(bundle: Bundle?) {
+        super.onCreate(bundle)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
