@@ -1,4 +1,4 @@
-package com.example.medicationreminder.ui.home
+package com.oursdevelopers.medicationreminder.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater

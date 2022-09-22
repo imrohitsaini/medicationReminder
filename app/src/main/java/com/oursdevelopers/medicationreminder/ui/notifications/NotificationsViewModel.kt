@@ -1,4 +1,4 @@
-package com.example.medicationreminder.ui.notifications
+package com.oursdevelopers.medicationreminder.ui.notifications
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
