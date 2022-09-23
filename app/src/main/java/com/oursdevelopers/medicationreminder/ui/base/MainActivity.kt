@@ -1,16 +1,20 @@
 package com.oursdevelopers.medicationreminder.ui.base
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatDelegate
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.oursdevelopers.medicationreminder.R
 import com.oursdevelopers.medicationreminder.databinding.ActivityMainBinding
-import com.oursdevelopers.medicationreminder.ui.HomeFragment
-import com.oursdevelopers.medicationreminder.ui.SettingsFragment
+import com.oursdevelopers.medicationreminder.ui.mainfragments.HomeFragment
+import com.oursdevelopers.medicationreminder.ui.mainfragments.SettingsFragment
+import com.oursdevelopers.medicationreminder.utilities.Utils
 
 class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private var isBackPressedTwice = false
 
     override fun onCreate(bundle: Bundle?) {
         super.onCreate(bundle)
@@ -37,5 +41,21 @@ class MainActivity : BaseActivity() {
         transaction.replace(R.id.fl_container, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
+    }
+
+    override fun onBackPressed() {
+        if (binding.bottomNav.selectedItemId == R.id.item_settings) {
+            binding.bottomNav.selectedItemId = R.id.item_home
+        } else if (binding.bottomNav.selectedItemId == R.id.item_home) {
+            if (isBackPressedTwice) {
+                super.onBackPressed()
+                return
+            }
+
+            supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            Utils.shortToast(this, "Press back again to exit")
+            isBackPressedTwice = true
+            Handler(Looper.getMainLooper()).postDelayed({ isBackPressedTwice = false }, 2000)
+        }
     }
 }

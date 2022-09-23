@@ -4,6 +4,7 @@
     package="com.oursdevelopers.medicationreminder">
 
     <application
+        android:name=".ui.base.App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFFFF</color>
+    <color name="background">#000000</color>
+    <color name="primary">#202020</color>
+    <color name="primaryVariant">#474747</color>
+    <color name="onPrimary">#f5f3f5</color>
+    <color name="secondary">#f5f3f5</color>
+    <color name="onSecondary">#f5f3f5</color>
+
+    <color name="textColorHeading">#f5f3f5</color>
+    <color name="textColorSubheading">#C0C0C0</color>
+
+    <color name="dividerLine">#4c4c4c</color>
+</resources>

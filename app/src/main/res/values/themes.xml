@@ -1,17 +1,17 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.MedicationReminder" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/light_primary</item>
-        <item name="colorPrimaryVariant">@color/light_primary</item>
-        <item name="colorOnPrimary">@color/light_on_primary</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary</item>
+        <item name="colorOnPrimary">@color/onPrimary</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/light_secondary</item>
-        <item name="colorSecondaryVariant">@color/light_secondary</item>
-        <item name="colorOnSecondary">@color/light_on_secondary</item>
-        <item name="background">@color/light_background</item>
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorSecondaryVariant">@color/secondary</item>
+        <item name="colorOnSecondary">@color/onSecondary</item>
+        <item name="background">@color/background</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/light_primary</item>
+        <item name="android:statusBarColor">@color/primary</item>
         <!-- Customize your theme here. -->
     </style>
 
@@ -26,7 +26,7 @@
 
     <style name="ThemeOverlay.App.BottomNavigationView" parent="">
         <item name="colorPrimary">@color/white</item>
-        <item name="colorOnPrimary">@color/light_primary</item>
+        <item name="colorOnPrimary">@color/primary</item>
     </style>
 
     <style name="BottomNavActive" parent="">

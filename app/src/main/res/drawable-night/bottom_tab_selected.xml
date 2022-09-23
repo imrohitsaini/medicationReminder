@@ -4,10 +4,10 @@
         <shape
             android:padding="@dimen/_10sdp"
             android:shape="rectangle">
-            <solid android:color="@color/dark_background" />
+            <solid android:color="@color/background" />
             <stroke
                 android:width="2dp"
-                android:color="@color/dark_background" />
+                android:color="@color/background" />
             <corners
                 android:bottomLeftRadius="@dimen/_5sdp"
                 android:bottomRightRadius="@dimen/_5sdp"
@@ -21,10 +21,10 @@
         android:right="@dimen/_40sdp">
         <shape android:shape="rectangle">
             <corners android:radius="@dimen/_10sdp" />
-            <solid android:color="@color/dark_on_primary" />
+            <solid android:color="@color/onPrimary" />
             <stroke
                 android:width="@dimen/_2sdp"
-                android:color="@color/dark_on_primary" />
+                android:color="@color/onPrimary" />
         </shape>
     </item>
 </layer-list>
