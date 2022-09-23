@@ -1,9 +1,14 @@
 package com.oursdevelopers.medicationreminder.ui.mainfragments
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
+import com.oursdevelopers.medicationreminder.R
 import com.oursdevelopers.medicationreminder.databinding.FragmentSettingsBinding
 import com.oursdevelopers.medicationreminder.ui.base.BaseFragment
+import com.oursdevelopers.medicationreminder.ui.base.MainActivity
 import com.oursdevelopers.medicationreminder.utilities.ClickHandler
 import com.oursdevelopers.medicationreminder.utilities.Storage
 
@@ -20,7 +25,18 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
 
         binding.inAppearance.svNightMode.setOnCheckedChangeListener { _, isChecked ->
             Storage.storeLocal("isNightModeOn", isChecked)
+            Handler(Looper.getMainLooper()).postDelayed({ restartApp() }, 100)
         }
+    }
+    //endregion
+
+    //region SWITCH THEM
+    private fun restartApp() {
+        val intent = Intent(requireActivity(), MainActivity::class.java)
+        intent.putExtra("selectedFragment", R.id.item_settings)
+        startActivity(intent)
+        requireActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+        requireActivity().finish()
     }
     //endregion
 

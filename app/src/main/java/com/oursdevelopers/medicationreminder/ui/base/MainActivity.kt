@@ -3,6 +3,7 @@ package com.oursdevelopers.medicationreminder.ui.base
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.oursdevelopers.medicationreminder.R
@@ -15,13 +16,13 @@ class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private var isBackPressedTwice = false
+    private var selectedFragment = R.id.item_home
 
     override fun onCreate(bundle: Bundle?) {
         super.onCreate(bundle)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        loadFragment(HomeFragment())
 
         binding.bottomNav.setOnItemSelectedListener { item ->
 
@@ -33,6 +34,10 @@ class MainActivity : BaseActivity() {
             return@setOnItemSelectedListener true
         }
 
+        if (intent.hasExtra("selectedFragment"))
+            selectedFragment = intent.getIntExtra("selectedFragment", selectedFragment)
+
+        binding.bottomNav.selectedItemId = selectedFragment
 
     }
 
