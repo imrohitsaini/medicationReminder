@@ -6,6 +6,7 @@ import android.content.Context
 class App : Application() {
 
     companion object {
+        const val isDebugBuild = true
         lateinit var appContext: Context
     }
 
