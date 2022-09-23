@@ -6,7 +6,6 @@ import android.content.Context
 class App : Application() {
 
     companion object {
-        const val storageFile = "oursdevelopers_medreminder"
         lateinit var appContext: Context
     }
 

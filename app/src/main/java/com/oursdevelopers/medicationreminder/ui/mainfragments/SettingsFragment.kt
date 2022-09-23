@@ -11,6 +11,7 @@ import com.oursdevelopers.medicationreminder.ui.base.BaseFragment
 import com.oursdevelopers.medicationreminder.ui.base.MainActivity
 import com.oursdevelopers.medicationreminder.utilities.ClickHandler
 import com.oursdevelopers.medicationreminder.utilities.Storage
+import com.oursdevelopers.medicationreminder.utilities.Storage.Companion.isNightModeOn
 
 class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
     FragmentSettingsBinding::inflate
@@ -21,10 +22,10 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
         super.onViewCreated(view, savedInstanceState)
         binding.inAppearance.handleClick = this
 
-        binding.inAppearance.svNightMode.isChecked = Storage.fetchLocal("isNightModeOn")
+        binding.inAppearance.svNightMode.isChecked = Storage.fetchLocal(isNightModeOn)
 
         binding.inAppearance.svNightMode.setOnCheckedChangeListener { _, isChecked ->
-            Storage.storeLocal("isNightModeOn", isChecked)
+            Storage.storeLocal(isNightModeOn, isChecked)
             Handler(Looper.getMainLooper()).postDelayed({ restartApp() }, 100)
         }
     }
@@ -60,9 +61,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
     override fun onClick(v: View) {
         super.onClick(v)
         when (v.id) {
-
             binding.inAppearance.clNightMode.id -> binding.inAppearance.svNightMode.isChecked = !binding.inAppearance.svNightMode.isChecked
-
         }
     }
     //endregion
