@@ -7,4 +7,5 @@
     <string name="appearance">Appearance</string>
     <string name="settings_night_mode">Night Mode</string>
     <string name="settings_night_mode_desc">Enable Dark Theme</string>
+    <string name="welcome">Welcome</string>
 </resources>
