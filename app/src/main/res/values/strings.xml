@@ -10,4 +10,5 @@
     <string name="welcome">Welcome</string>
     <string name="item_mydes_title">My Meds</string>
     <string name="item_updates_title">Updates</string>
+    <string name="add_medicine">Add Meds</string>
 </resources>

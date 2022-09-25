@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager
 import com.oursdevelopers.medicationreminder.R
 import com.oursdevelopers.medicationreminder.databinding.ActivityMainBinding
 import com.oursdevelopers.medicationreminder.ui.mainfragments.screens.home.HomeFragment
+import com.oursdevelopers.medicationreminder.ui.mainfragments.screens.mymeds.MyMedsFragment
 import com.oursdevelopers.medicationreminder.ui.mainfragments.screens.settings.SettingsFragment
 import com.oursdevelopers.medicationreminder.utilities.Utils
 
@@ -27,6 +28,7 @@ class MainActivity : BaseActivity() {
 
             when (item.itemId) {
                 R.id.item_home -> loadFragment(HomeFragment())
+                R.id.item_mymeds -> loadFragment(MyMedsFragment())
                 R.id.item_settings -> loadFragment(SettingsFragment())
             }
 
@@ -47,9 +49,9 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
-        if (binding.bottomNav.selectedItemId == R.id.item_settings) {
+        if (binding.bottomNav.selectedItemId != R.id.item_home) {
             binding.bottomNav.selectedItemId = R.id.item_home
-        } else if (binding.bottomNav.selectedItemId == R.id.item_home) {
+        } else {
             if (isBackPressedTwice) {
                 super.onBackPressed()
                 return
