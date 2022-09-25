@@ -54,7 +54,7 @@ class MainActivity : BaseActivity() {
                 super.onBackPressed()
                 return
             }
-            
+
             Utils.shortToast(this, "Press back again to exit")
             isBackPressedTwice = true
             Handler(Looper.getMainLooper()).postDelayed({ isBackPressedTwice = false }, 2000)

@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -32,13 +33,37 @@ import com.oursdevelopers.medicationreminder.utilities.Storage
 
 @Composable
 fun SettingScreen() {
+    val nightModeOn = remember { mutableStateOf(Storage.fetchLocal(Storage.isNightModeOn)) }
+    val rowClickable = remember { mutableStateOf(true) }
+    val context = LocalContext.current
+    val nightModeSwitch = {
+        if (rowClickable.value) {
+            rowClickable.value = false
+            nightModeOn.value = !nightModeOn.value
+            Storage.storeLocal(Storage.isNightModeOn, nightModeOn.value)
+            Handler(Looper.getMainLooper()).postDelayed({
+                val intent = Intent(context, MainActivity::class.java)
+                intent.putExtra("selectedFragment", R.id.item_settings)
+                context.startActivity(intent)
+                (context as Activity).overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                context.finish()
+            }, 100)
+            Handler(Looper.getMainLooper()).postDelayed({
+                rowClickable.value = true
+            }, 500)
+        }
+    }
+
+
     Column {
         TextHeading("Appearance")
         LayoutSetting(
             R.drawable.ic_night_mode,
             R.string.settings_night_mode,
             R.string.settings_night_mode_desc,
-            Storage.fetchLocal(Storage.isNightModeOn)
+            rowClickable,
+            nightModeOn,
+            nightModeSwitch
         )
     }
 }
@@ -75,27 +100,14 @@ fun TextHeading(txt: String) {
 }
 
 @Composable
-fun LayoutSetting(imageRes: Int, titleRes: Int, descRes: Int, isNightModeOn: Boolean) {
-    val context = LocalContext.current
-    val nightModeOn = remember { mutableStateOf(isNightModeOn) }
-    val rowClickable = remember { mutableStateOf(true) }
-    val nightModeSwitch = {
-        if (rowClickable.value) {
-            rowClickable.value = false
-            nightModeOn.value = !nightModeOn.value
-            Storage.storeLocal(Storage.isNightModeOn, nightModeOn.value)
-            Handler(Looper.getMainLooper()).postDelayed({
-                val intent = Intent(context, MainActivity::class.java)
-                intent.putExtra("selectedFragment", R.id.item_settings)
-                context.startActivity(intent)
-                (context as Activity).overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
-                context.finish()
-            }, 100)
-            Handler(Looper.getMainLooper()).postDelayed({
-                rowClickable.value = true
-            }, 500)
-        }
-    }
+fun LayoutSetting(
+    imageRes: Int,
+    titleRes: Int,
+    descRes: Int,
+    rowClickable: MutableState<Boolean>,
+    nightModeOn: MutableState<Boolean>,
+    onClickRow: () -> Unit,
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -104,7 +116,7 @@ fun LayoutSetting(imageRes: Int, titleRes: Int, descRes: Int, isNightModeOn: Boo
                 indication = rememberRipple(bounded = true, color = colorResource(id = R.color.textColorHeading)),
                 enabled = rowClickable.value,
             ) {
-                nightModeSwitch()
+                onClickRow()
             },
     ) {
         Image(
