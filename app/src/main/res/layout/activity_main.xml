@@ -24,6 +24,7 @@
         style="@style/Widget.App.BottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
+        app:labelVisibilityMode="labeled"
         app:itemTextAppearanceActive="@style/BottomNavActive"
         app:itemTextAppearanceInactive="@style/BottomNavInactive"
         app:layout_constraintBottom_toBottomOf="parent"
