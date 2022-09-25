@@ -7,8 +7,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.oursdevelopers.medicationreminder.R
 import com.oursdevelopers.medicationreminder.databinding.ActivityMainBinding
-import com.oursdevelopers.medicationreminder.ui.mainfragments.HomeFragment
-import com.oursdevelopers.medicationreminder.ui.mainfragments.SettingsFragment
+import com.oursdevelopers.medicationreminder.ui.mainfragments.screens.home.HomeFragment
+import com.oursdevelopers.medicationreminder.ui.mainfragments.screens.settings.SettingsFragment
 import com.oursdevelopers.medicationreminder.utilities.Utils
 
 class MainActivity : BaseActivity() {
@@ -43,7 +43,6 @@ class MainActivity : BaseActivity() {
     private fun loadFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fl_container, fragment)
-        transaction.addToBackStack(null)
         transaction.commit()
     }
 
@@ -55,8 +54,7 @@ class MainActivity : BaseActivity() {
                 super.onBackPressed()
                 return
             }
-
-            supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            
             Utils.shortToast(this, "Press back again to exit")
             isBackPressedTwice = true
             Handler(Looper.getMainLooper()).postDelayed({ isBackPressedTwice = false }, 2000)

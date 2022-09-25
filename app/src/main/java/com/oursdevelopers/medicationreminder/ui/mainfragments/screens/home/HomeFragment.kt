@@ -1,4 +1,4 @@
-package com.oursdevelopers.medicationreminder.ui.mainfragments
+package com.oursdevelopers.medicationreminder.ui.mainfragments.screens.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
