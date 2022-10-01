@@ -2,12 +2,12 @@ package com.oursdevelopers.medicationreminder.ui.addmeds
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import com.oursdevelopers.medicationreminder.ui.base.BaseComponentActivity
+import com.oursdevelopers.medicationreminder.ui.base.BaseActivity
 
-class AddMedicineActivity : BaseComponentActivity() {
+class AddMedicineActivity : BaseActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreate(bundle: Bundle?) {
+        super.onCreate(bundle)
         setContent {
             AddMedsCompose()
         }
