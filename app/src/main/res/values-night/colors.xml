@@ -12,7 +12,7 @@
     <color name="textColorSubheading">#C0C0C0</color>
     <color name="dividerLine">#4c4c4c</color>
     <color name="placeHolderColor">#464646</color>
-    <color name="textBoxTextColor">#313131</color>
+    <color name="textBoxTextColor">#000000</color>
     <color name="textBoxBackground">#999999</color>
     <color name="cursorColor">#313131</color>
 </resources>

@@ -1,6 +1,6 @@
 <resources>
+    <string name="empty" />
     <string name="app_name">Meds Reminder</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="item_home_title">Home</string>
     <string name="item_settings_title">Settings</string>
@@ -12,4 +12,15 @@
     <string name="item_updates_title">Updates</string>
     <string name="add_medicine">Add Meds</string>
     <string name="go_back">Go Back</string>
+    <string name="add_scheule">Add Schedule</string>
+    <string name="medicine_name">Medicine Name</string>
+    <string name="medicine_name_placeholder">e.g Wysolone 5mg, Tobamist 5ml</string>
+    <string name="set_schedule">Set Schedule</string>
+    <string name="frequency">Frequency</string>
+    <string name="frequency_item_daily">Daily</string>
+    <string name="frequency_item_alt">Alternate</string>
+    <string name="frequency_item_weekly">Weekly</string>
+    <string name="frequency_item_monthly">Monthly</string>
+    <string name="frequency_item_custom">Custom</string>
+    <string name="doses">Doses</string>
 </resources>
