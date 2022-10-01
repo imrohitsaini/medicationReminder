@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="transparent">#00000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="background">#000000</color>
     <color name="primary">#202020</color>
@@ -7,9 +8,11 @@
     <color name="onPrimary">#f5f3f5</color>
     <color name="secondary">#f5f3f5</color>
     <color name="onSecondary">#f5f3f5</color>
-
     <color name="textColorHeading">#f5f3f5</color>
     <color name="textColorSubheading">#C0C0C0</color>
-
     <color name="dividerLine">#4c4c4c</color>
+    <color name="placeHolderColor">#464646</color>
+    <color name="textBoxTextColor">#313131</color>
+    <color name="textBoxBackground">#999999</color>
+    <color name="cursorColor">#313131</color>
 </resources>

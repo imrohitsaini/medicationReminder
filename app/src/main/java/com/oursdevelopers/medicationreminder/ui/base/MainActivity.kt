@@ -4,12 +4,11 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.oursdevelopers.medicationreminder.R
 import com.oursdevelopers.medicationreminder.databinding.ActivityMainBinding
-import com.oursdevelopers.medicationreminder.ui.mainfragments.screens.home.HomeFragment
-import com.oursdevelopers.medicationreminder.ui.mainfragments.screens.mymeds.MyMedsFragment
-import com.oursdevelopers.medicationreminder.ui.mainfragments.screens.settings.SettingsFragment
+import com.oursdevelopers.medicationreminder.ui.mainfragments.home.HomeFragment
+import com.oursdevelopers.medicationreminder.ui.mainfragments.mymeds.MyMedsFragment
+import com.oursdevelopers.medicationreminder.ui.mainfragments.settings.SettingsFragment
 import com.oursdevelopers.medicationreminder.utilities.Utils
 
 class MainActivity : BaseActivity() {

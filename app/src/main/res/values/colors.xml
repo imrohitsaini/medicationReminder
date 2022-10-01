@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="transparent">#00000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="background">#f5f3f5</color>
     <color name="primary">#006BA6</color>
@@ -10,4 +11,8 @@
     <color name="textColorHeading">#006BA6</color>
     <color name="textColorSubheading">#313131</color>
     <color name="dividerLine">#3288b7</color>
+    <color name="placeHolderColor">#464646</color>
+    <color name="textBoxTextColor">#313131</color>
+    <color name="textBoxBackground">#F4F1F4</color>
+    <color name="cursorColor">#313131</color>
 </resources>

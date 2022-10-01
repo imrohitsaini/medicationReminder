@@ -1,4 +1,4 @@
-package com.oursdevelopers.medicationreminder.ui.mainfragments.screens.settings
+package com.oursdevelopers.medicationreminder.ui.mainfragments.settings
 
 import android.app.Activity
 import android.content.Intent

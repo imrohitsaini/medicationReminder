@@ -1,6 +1,7 @@
 package com.oursdevelopers.medicationreminder.ui.theme
 
 import androidx.compose.material.Typography
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -67,6 +68,21 @@ val SettingsTypography = Typography(
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp,
         letterSpacing = 0.25.sp
+    ),
+    defaultFontFamily = ProximaNova
+)
+
+
+val TextFieldStyle = Typography(
+    subtitle1 = TextStyle(
+        fontWeight = FontWeight.Bold,
+        fontSize = 16.sp,
+        letterSpacing = 0.15.sp
+    ),
+    body2 = TextStyle(
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
+        letterSpacing = 0.25.sp,
     ),
     defaultFontFamily = ProximaNova
 )
