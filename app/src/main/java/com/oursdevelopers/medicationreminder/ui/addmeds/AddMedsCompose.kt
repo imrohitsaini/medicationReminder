@@ -434,7 +434,7 @@ fun DropDownMenu(
                                             .align(Alignment.CenterVertically)
                                             .padding(
                                                 start = dimensionResource(id = _10sdp),
-                                                top = dimensionResource(id = _6sdp),
+                                                top = dimensionResource(id = _7sdp),
                                                 end = 0.dp,
                                                 bottom = dimensionResource(id = _2sdp),
                                             )
@@ -445,7 +445,7 @@ fun DropDownMenu(
                                             .align(Alignment.CenterVertically)
                                             .padding(
                                                 start = dimensionResource(id = _10sdp),
-                                                top = dimensionResource(id = _6sdp),
+                                                top = dimensionResource(id = _7sdp),
                                                 end = 0.dp,
                                                 bottom = dimensionResource(id = _2sdp),
                                             )
@@ -458,7 +458,7 @@ fun DropDownMenu(
                                             .align(Alignment.CenterVertically)
                                             .padding(
                                                 start = 0.dp,
-                                                top = dimensionResource(id = _6sdp),
+                                                top = dimensionResource(id = _7sdp),
                                                 end = dimensionResource(id = _10sdp),
                                                 bottom = dimensionResource(id = _2sdp),
                                             )
