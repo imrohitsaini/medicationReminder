@@ -29,7 +29,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
-import androidx.compose.ui.window.PopupProperties
 import com.intuit.sdp.R.dimen.*
 import com.oursdevelopers.medicationreminder.R
 import com.oursdevelopers.medicationreminder.ui.theme.SettingsTypography
@@ -52,6 +51,25 @@ fun AddMedsCompose() {
     )
     val frequencyTextSize = remember { mutableStateOf(Size.Zero) }
     val frequencyText = remember { mutableStateOf(frequencyItems[0]) }
+    val onSelectingFrequency: (index: Int) -> Unit = {
+        frequencyText.value = frequencyItems[it]
+        frequencyExpanded.value = false
+    }
+
+    val doseExpanded = remember { mutableStateOf(false) }
+    val doseItems = listOf(
+        stringResource(id = R.string.dose_item_1),
+        stringResource(id = R.string.dose_item_2),
+        stringResource(id = R.string.dose_item_3),
+        stringResource(id = R.string.dose_item_4),
+        stringResource(id = R.string.dose_item_custom),
+    )
+    val doseTextSize = remember { mutableStateOf(Size.Zero) }
+    val doseText = remember { mutableStateOf(doseItems[0]) }
+    val onSelectingDose: (index: Int) -> Unit = {
+        doseText.value = doseItems[it]
+        doseExpanded.value = false
+    }
 
     Box(
         modifier = Modifier
@@ -71,7 +89,19 @@ fun AddMedsCompose() {
                     dimensionResource(id = _20sdp).value.dp
                 )
             ) {
-                AddRemForm(medicineNameText, frequencyExpanded, frequencyItems, frequencyTextSize, frequencyText)
+                AddRemForm(
+                    medicineName = medicineNameText,
+                    frequencyExpanded = frequencyExpanded,
+                    frequencyItems = frequencyItems,
+                    frequencyTextSize = frequencyTextSize,
+                    frequencyText = frequencyText,
+                    onSelectingFrequency = onSelectingFrequency,
+                    doseExpanded = doseExpanded,
+                    doseItems = doseItems,
+                    doseTextSize = doseTextSize,
+                    doseText = doseText,
+                    onSelectingDose = onSelectingDose,
+                )
             }
         }
         Box(
@@ -123,7 +153,19 @@ fun AppBar(context: Context, activityName: String) {
 }
 
 @Composable
-fun AddRemForm(medicineName: MutableState<String>, frequencyExpanded: MutableState<Boolean>, frequencyItems: List<String>, frequencyTextSize: MutableState<Size>, frequencyText: MutableState<String>) {
+fun AddRemForm(
+    medicineName: MutableState<String>,
+    frequencyExpanded: MutableState<Boolean>,
+    frequencyItems: List<String>,
+    frequencyTextSize: MutableState<Size>,
+    frequencyText: MutableState<String>,
+    onSelectingFrequency: (index: Int) -> Unit,
+    doseExpanded: MutableState<Boolean>,
+    doseItems: List<String>,
+    doseTextSize: MutableState<Size>,
+    doseText: MutableState<String>,
+    onSelectingDose: (index: Int) -> Unit
+) {
     val maxCharMedicineName = 20
     Column(modifier = Modifier.fillMaxWidth()) {
         TextBoxWithLeadingIcon(
@@ -147,11 +189,15 @@ fun AddRemForm(medicineName: MutableState<String>, frequencyExpanded: MutableSta
                 modifier = Modifier
                     .weight(weight = 0.55f, fill = true)
             ) {
-                DropDownFrequency(
+                DropDownMenu(
                     label = stringResource(R.string.frequency),
                     placeholder = stringResource(id = R.string.empty),
-                    trailingIcon = painterResource(id = R.drawable.ic_drop_down),
-                    frequencyExpanded, frequencyItems, frequencyTextSize, frequencyText
+                    trailingIcon = painterResource(id = R.drawable.ic_dropdown_down_arrow),
+                    isExpanded = frequencyExpanded,
+                    items = frequencyItems,
+                    widthSize = frequencyTextSize,
+                    text = frequencyText,
+                    onSelectingItem = onSelectingFrequency
                 )
             }
             Box(
@@ -164,11 +210,15 @@ fun AddRemForm(medicineName: MutableState<String>, frequencyExpanded: MutableSta
                         bottom = 0.dp
                     )
             ) {
-                DropDown(
-                    label = stringResource(R.string.doses),
+                DropDownMenu(
+                    label = stringResource(R.string.doses_per_day),
                     placeholder = stringResource(id = R.string.empty),
-                    mutableText = medicineName,
-                    trailingIcon = painterResource(id = R.drawable.ic_drop_down)
+                    trailingIcon = painterResource(id = R.drawable.ic_dropdown_down_arrow),
+                    isExpanded = doseExpanded,
+                    items = doseItems,
+                    widthSize = doseTextSize,
+                    text = doseText,
+                    onSelectingItem = onSelectingDose
                 )
             }
         }
@@ -234,77 +284,23 @@ fun TextBoxWithLeadingIcon(label: String, placeholder: String, mutableText: Muta
 }
 
 @Composable
-fun DropDown(label: String, placeholder: String, mutableText: MutableState<String>, trailingIcon: Painter) {
-    Column {
-        Text(
-            text = label,
-            color = colorResource(id = R.color.textColorHeading),
-            style = TextFieldStyle.body2
-        )
-        Card(
-            shape = RoundedCornerShape(dimensionResource(id = _10sdp)),
-            elevation = dimensionResource(id = _2sdp),
-            modifier = Modifier
-                .padding(
-                    0.dp,
-                    dimensionResource(id = _10sdp),
-                    0.dp,
-                    0.dp,
-                )
-                .clickable(
-                    interactionSource = remember { MutableInteractionSource() },
-                    indication = null,
-                ) {
-                    Log.e("testing", "clicking dropdown")
-                }
-        ) {
-            TextField(
-                value = mutableText.value,
-                enabled = false,
-                singleLine = true,
-                onValueChange = {},
-                trailingIcon = {
-                    Icon(
-                        painter = trailingIcon,
-                        contentDescription = label,
-                        tint = colorResource(id = R.color.primary),
-                    )
-                },
-                textStyle = TextFieldStyle.subtitle1,
-                placeholder = {
-                    Text(
-                        text = placeholder,
-                        fontStyle = FontStyle.Italic,
-                        style = TextFieldStyle.subtitle2,
-                        color = colorResource(id = R.color.placeHolderColor)
-                    )
-                },
-                colors = TextFieldDefaults.textFieldColors(
-                    textColor = colorResource(id = R.color.textBoxTextColor),
-                    cursorColor = colorResource(id = R.color.cursorColor),
-                    backgroundColor = colorResource(id = R.color.textBoxBackground),
-                    focusedIndicatorColor = colorResource(id = R.color.transparent),
-                    unfocusedIndicatorColor = colorResource(id = R.color.transparent),
-                    disabledIndicatorColor = colorResource(id = R.color.transparent),
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-
-            )
-        }
-    }
-}
-
-@Composable
-fun DropDownFrequency(
+fun DropDownMenu(
     label: String,
     placeholder: String,
     trailingIcon: Painter,
-    frequencyExpanded: MutableState<Boolean>,
-    frequencyItems: List<String>,
-    frequencyTextSize: MutableState<Size>,
-    frequencyText: MutableState<String>
+    isExpanded: MutableState<Boolean>,
+    items: List<String>,
+    widthSize: MutableState<Size>,
+    text: MutableState<String>,
+    onSelectingItem: (index: Int) -> Unit
 ) {
+
+    val icon = if (isExpanded.value) {
+        painterResource(id = R.drawable.ic_dropdown_up_arrow)
+    } else {
+        trailingIcon
+    }
+
     Column {
         Text(
             text = label,
@@ -322,26 +318,25 @@ fun DropDownFrequency(
                     0.dp,
                 )
                 .onGloballyPositioned { coordinates ->
-                    // This value is used to assign to
-                    // the DropDown the same width
-                    frequencyTextSize.value = coordinates.size.toSize()
+                    widthSize.value = coordinates.size.toSize()
                 }
                 .clickable(
                     interactionSource = remember { MutableInteractionSource() },
                     indication = null,
                 ) {
-                    Log.e("testing", "clicking dropdown " + frequencyExpanded.value)
-                    frequencyExpanded.value = !frequencyExpanded.value
+                    if (!isExpanded.value) {
+                        isExpanded.value = true
+                    }
                 }
         ) {
             TextField(
-                value = frequencyText.value,
+                value = text.value,
                 enabled = false,
                 singleLine = true,
                 onValueChange = {},
                 trailingIcon = {
                     Icon(
-                        painter = trailingIcon,
+                        painter = icon,
                         contentDescription = label,
                         tint = colorResource(id = R.color.primary),
                     )
@@ -368,45 +363,137 @@ fun DropDownFrequency(
                     .fillMaxWidth()
 
             )
-            MaterialTheme(shapes = MaterialTheme.shapes.copy(medium = RoundedCornerShape(dimensionResource(id = _10sdp)))) {
+            MaterialTheme(
+                shapes = MaterialTheme
+                    .shapes
+                    .copy(
+                        medium = RoundedCornerShape(
+                            dimensionResource(id = _10sdp)
+                        )
+                    )
+            ) {
                 DropdownMenu(
-                    expanded = frequencyExpanded.value,
+                    expanded = isExpanded.value,
                     offset = DpOffset(0.dp, dimensionResource(id = _5sdp)),
-                    onDismissRequest = { frequencyExpanded.value = false },
-                    properties = PopupProperties(clippingEnabled = false),
+                    onDismissRequest = { isExpanded.value = false },
                     modifier = Modifier
-                        .width(with(LocalDensity.current) { frequencyTextSize.value.width.toDp() })
+                        .width(with(LocalDensity.current) { widthSize.value.width.toDp() })
                         .background(color = colorResource(id = R.color.textBoxBackground))
                 ) {
-                    frequencyItems.forEach { label ->
-                        DropdownMenuItem(
-                            onClick = {
-                                frequencyText.value = label
-                                frequencyExpanded.value = false
-                            }
-                        ) {
-                            if (label.equals(stringResource(id = R.string.frequency_item_custom), true)) {
-                                Row {
+                    items.forEachIndexed { index, label ->
+
+                        when (index) {
+                            //first item
+                            0 -> {
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .clickable(
+                                            interactionSource = remember { MutableInteractionSource() },
+                                            indication = null,
+                                            enabled = true,
+                                        ) {
+                                            onSelectingItem(index)
+                                        }
+                                ) {
                                     Text(
                                         text = label,
                                         style = TextFieldStyle.subtitle2,
                                         color = colorResource(id = R.color.textBoxTextColor),
                                         fontWeight = FontWeight.SemiBold,
+                                        modifier = Modifier
+                                            .align(Alignment.CenterVertically)
+                                            .padding(
+                                                start = dimensionResource(id = _10sdp),
+                                                top = dimensionResource(id = _2sdp),
+                                                end = dimensionResource(id = _10sdp),
+                                                bottom = 0.dp,
+                                            )
                                     )
-                                    Spacer(Modifier.weight(1f))
+                                }
+                            }
+                            //last item
+                            items.size - 1 -> {
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .clickable(
+                                            interactionSource = remember { MutableInteractionSource() },
+                                            indication = null,
+                                            enabled = true,
+                                        ) {
+                                            onSelectingItem(index)
+                                        }
+                                ) {
+                                    Text(
+                                        text = label,
+                                        style = TextFieldStyle.subtitle2,
+                                        color = colorResource(id = R.color.textBoxTextColor),
+                                        fontWeight = FontWeight.SemiBold,
+                                        modifier = Modifier
+                                            .align(Alignment.CenterVertically)
+                                            .padding(
+                                                start = dimensionResource(id = _10sdp),
+                                                top = dimensionResource(id = _6sdp),
+                                                end = 0.dp,
+                                                bottom = dimensionResource(id = _2sdp),
+                                            )
+                                    )
+                                    Spacer(
+                                        Modifier
+                                            .weight(1f)
+                                            .align(Alignment.CenterVertically)
+                                            .padding(
+                                                start = dimensionResource(id = _10sdp),
+                                                top = dimensionResource(id = _6sdp),
+                                                end = 0.dp,
+                                                bottom = dimensionResource(id = _2sdp),
+                                            )
+                                    )
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_edit),
                                         contentDescription = null,
                                         tint = colorResource(id = R.color.primary),
+                                        modifier = Modifier
+                                            .align(Alignment.CenterVertically)
+                                            .padding(
+                                                start = 0.dp,
+                                                top = dimensionResource(id = _6sdp),
+                                                end = dimensionResource(id = _10sdp),
+                                                bottom = dimensionResource(id = _2sdp),
+                                            )
                                     )
                                 }
-                            } else {
-                                Text(
-                                    text = label,
-                                    style = TextFieldStyle.subtitle2,
-                                    color = colorResource(id = R.color.textBoxTextColor),
-                                    fontWeight = FontWeight.SemiBold
-                                )
+                            }
+                            //inbetween items
+                            else -> {
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .clickable(
+                                            interactionSource = remember { MutableInteractionSource() },
+                                            indication = null,
+                                            enabled = true,
+                                        ) {
+                                            onSelectingItem(index)
+                                        }
+                                ) {
+                                    Text(
+                                        text = label,
+                                        style = TextFieldStyle.subtitle2,
+                                        color = colorResource(id = R.color.textBoxTextColor),
+                                        fontWeight = FontWeight.SemiBold,
+                                        modifier = Modifier
+                                            .align(Alignment.CenterVertically)
+                                            .padding(
+                                                start = dimensionResource(id = _10sdp),
+                                                top = dimensionResource(id = _10sdp),
+                                                end = dimensionResource(id = _10sdp),
+                                                bottom = 0.dp,
+                                            )
+                                            .fillMaxWidth()
+                                    )
+                                }
                             }
                         }
                     }

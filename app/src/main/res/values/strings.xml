@@ -22,5 +22,10 @@
     <string name="frequency_item_weekly">Weekly</string>
     <string name="frequency_item_monthly">Monthly</string>
     <string name="frequency_item_custom">Custom</string>
-    <string name="doses">Doses</string>
+    <string name="doses_per_day">Doses / day</string>
+    <string name="dose_item_1">1</string>
+    <string name="dose_item_2">2</string>
+    <string name="dose_item_3">3</string>
+    <string name="dose_item_4">4</string>
+    <string name="dose_item_custom">Custom</string>
 </resources>
